@@ -1,7 +1,0 @@
-Concevoir un logiciel pour afficher des graphiques sur des données
-
-domaine de l'app : Démographies : naissance
-
-données : office fédéral de la statistique
-
-Une fois que vous avez choisi votre domaine, il vous faut définir par quel moyen vous allez obtenir les données sur lesquels vous allez travailler : fichiers .json
