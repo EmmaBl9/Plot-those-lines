@@ -1,0 +1,206 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|c:\\users\\pt70wvh\\documents\\github\\plot-those-lines\\plot-those-lines\\components\\pages\\graphique.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|solutionrelative:plot-those-lines\\components\\pages\\graphique.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\libman.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Plot-those-lines\\libman.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|c:\\users\\pt70wvh\\documents\\github\\plot-those-lines\\plot-those-lines\\components\\layout\\graphique.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|solutionrelative:plot-those-lines\\components\\layout\\graphique.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|c:\\users\\pt70wvh\\documents\\github\\plot-those-lines\\plot-those-lines\\components\\layout\\main.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|solutionrelative:plot-those-lines\\components\\layout\\main.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|c:\\users\\pt70wvh\\documents\\github\\plot-those-lines\\plot-those-lines\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|solutionrelative:plot-those-lines\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|c:\\users\\pt70wvh\\documents\\github\\plot-those-lines\\plot-those-lines\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|solutionrelative:plot-those-lines\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|c:\\users\\pt70wvh\\documents\\github\\plot-those-lines\\plot-those-lines\\components\\pages\\homepage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|solutionrelative:plot-those-lines\\components\\pages\\homepage.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|c:\\users\\pt70wvh\\documents\\github\\plot-those-lines\\plot-those-lines\\plot-those-lines.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|solutionrelative:plot-those-lines\\plot-those-lines.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|c:\\users\\pt70wvh\\documents\\github\\plot-those-lines\\plot-those-lines\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|solutionrelative:plot-those-lines\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|c:\\users\\pt70wvh\\documents\\github\\plot-those-lines\\plot-those-lines\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|solutionrelative:plot-those-lines\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|c:\\users\\pt70wvh\\documents\\github\\plot-those-lines\\plot-those-lines\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E65CA74E-71D9-4082-AE92-6C5798762C52}|Plot-those-lines\\Plot-those-lines.csproj|solutionrelative:plot-those-lines\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 9,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Plot-those-lines",
+              "DocumentMoniker": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Plot-those-lines.csproj",
+              "RelativeDocumentMoniker": "Plot-those-lines\\Plot-those-lines.csproj",
+              "ToolTip": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Plot-those-lines.csproj",
+              "RelativeToolTip": "Plot-those-lines\\Plot-those-lines.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-09-17T14:26:31.055Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "libman.json",
+              "DocumentMoniker": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\libman.json",
+              "RelativeDocumentMoniker": "Plot-those-lines\\libman.json",
+              "ToolTip": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\libman.json",
+              "RelativeToolTip": "Plot-those-lines\\libman.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-17T14:26:26.567Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Graphique.razor",
+              "DocumentMoniker": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Components\\Layout\\Graphique.razor",
+              "RelativeDocumentMoniker": "Plot-those-lines\\Components\\Layout\\Graphique.razor",
+              "ToolTip": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Components\\Layout\\Graphique.razor",
+              "RelativeToolTip": "Plot-those-lines\\Components\\Layout\\Graphique.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-17T14:13:34.217Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Main.razor",
+              "DocumentMoniker": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Components\\Layout\\Main.razor",
+              "RelativeDocumentMoniker": "Plot-those-lines\\Components\\Layout\\Main.razor",
+              "ToolTip": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Components\\Layout\\Main.razor",
+              "RelativeToolTip": "Plot-those-lines\\Components\\Layout\\Main.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-17T14:13:29.88Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Components\\Layout\\NavMenu.razor",
+              "RelativeDocumentMoniker": "Plot-those-lines\\Components\\Layout\\NavMenu.razor",
+              "ToolTip": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Components\\Layout\\NavMenu.razor",
+              "RelativeToolTip": "Plot-those-lines\\Components\\Layout\\NavMenu.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-17T14:13:25.105Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "HomePage.razor",
+              "DocumentMoniker": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Components\\Pages\\HomePage.razor",
+              "RelativeDocumentMoniker": "Plot-those-lines\\Components\\Pages\\HomePage.razor",
+              "ToolTip": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Components\\Pages\\HomePage.razor",
+              "RelativeToolTip": "Plot-those-lines\\Components\\Pages\\HomePage.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-17T14:13:10.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Components\\_Imports.razor",
+              "RelativeDocumentMoniker": "Plot-those-lines\\Components\\_Imports.razor",
+              "ToolTip": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Components\\_Imports.razor",
+              "RelativeToolTip": "Plot-those-lines\\Components\\_Imports.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-17T14:13:06.07Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "App.razor",
+              "DocumentMoniker": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Components\\App.razor",
+              "RelativeDocumentMoniker": "Plot-those-lines\\Components\\App.razor",
+              "ToolTip": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Components\\App.razor",
+              "RelativeToolTip": "Plot-those-lines\\Components\\App.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-17T14:13:00.016Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Plot-those-lines\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Plot-those-lines\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-17T13:59:12.714Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Graphique.razor",
+              "DocumentMoniker": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Components\\Pages\\Graphique.razor",
+              "RelativeDocumentMoniker": "Plot-those-lines\\Components\\Pages\\Graphique.razor",
+              "ToolTip": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Components\\Pages\\Graphique.razor",
+              "RelativeToolTip": "Plot-those-lines\\Components\\Pages\\Graphique.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-17T13:54:42.857Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Program.cs",
+              "RelativeDocumentMoniker": "Plot-those-lines\\Program.cs",
+              "ToolTip": "C:\\Users\\pt70wvh\\Documents\\GitHub\\Plot-those-lines\\Plot-those-lines\\Program.cs",
+              "RelativeToolTip": "Plot-those-lines\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T13:54:35.947Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

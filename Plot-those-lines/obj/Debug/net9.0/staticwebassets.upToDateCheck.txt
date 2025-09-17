@@ -1,0 +1,4 @@
+wwwroot\css\app.css
+wwwroot\favicon.ico
+C:\Users\pt70wvh\Documents\GitHub\Plot-those-lines\Plot-those-lines\wwwroot\css\app.css
+C:\Users\pt70wvh\Documents\GitHub\Plot-those-lines\Plot-those-lines\wwwroot\favicon.ico

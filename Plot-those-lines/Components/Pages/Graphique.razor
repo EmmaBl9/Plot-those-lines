@@ -1,0 +1,27 @@
+﻿@page "/SecondPage"
+@using ScottPlot
+@using ScottPlot.Blazor
+
+<h1>ScottPlot 5 in Blazor 57</h1>
+
+<BlazorPlot @ref=BlazorPlot Style="width: 400px; height: 300px;" />
+
+<div>asdasdf</div>
+
+@code {
+    
+    BlazorPlot BlazorPlot { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        BlazorPlot.Plot.Add.Signal(Generate.Sin());
+        BlazorPlot.Plot.Add.Signal(Generate.Cos());
+        BlazorPlot.Render()
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        BlazorPlot.Plot.Add.Signal(Generate.Sin());
+        BlazorPlot.Plot.Add.Signal(Generate.Cos());
+    }
+}
