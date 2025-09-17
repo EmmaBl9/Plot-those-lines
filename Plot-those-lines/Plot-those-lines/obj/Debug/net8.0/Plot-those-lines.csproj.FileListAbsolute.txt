@@ -17,10 +17,7 @@ C:\Users\pt70wvh\Documents\GitHub\Plot-those-lines\Plot-those-lines\Plot-those-l
 C:\Users\pt70wvh\Documents\GitHub\Plot-those-lines\Plot-those-lines\Plot-those-lines\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\pt70wvh\Documents\GitHub\Plot-those-lines\Plot-those-lines\Plot-those-lines\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\pt70wvh\Documents\GitHub\Plot-those-lines\Plot-those-lines\Plot-those-lines\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
-C:\Users\pt70wvh\Documents\GitHub\Plot-those-lines\Plot-those-lines\Plot-those-lines\obj\Debug\net8.0\scopedcss\Components\Layout\MainLayout.razor.rz.scp.css
-C:\Users\pt70wvh\Documents\GitHub\Plot-those-lines\Plot-those-lines\Plot-those-lines\obj\Debug\net8.0\scopedcss\Components\Layout\NavMenu.razor.rz.scp.css
 C:\Users\pt70wvh\Documents\GitHub\Plot-those-lines\Plot-those-lines\Plot-those-lines\obj\Debug\net8.0\scopedcss\bundle\Plot-those-lines.styles.css
-C:\Users\pt70wvh\Documents\GitHub\Plot-those-lines\Plot-those-lines\Plot-those-lines\obj\Debug\net8.0\scopedcss\projectbundle\Plot-those-lines.bundle.scp.css
 C:\Users\pt70wvh\Documents\GitHub\Plot-those-lines\Plot-those-lines\Plot-those-lines\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\pt70wvh\Documents\GitHub\Plot-those-lines\Plot-those-lines\Plot-those-lines\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\pt70wvh\Documents\GitHub\Plot-those-lines\Plot-those-lines\Plot-those-lines\obj\Debug\net8.0\staticwebassets.development.json

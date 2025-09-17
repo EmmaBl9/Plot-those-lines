@@ -24,30 +24,34 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pt70wvh/Documents/GitHub/Plot-those-lines/Plot-those-lines/Plot-those-lines/Components/Pages/Chart.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDaGFydC5yYXpvcg==
+[C:/Users/pt70wvh/Documents/GitHub/Plot-those-lines/Plot-those-lines/Plot-those-lines/Components/Layout/DateSelector.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcRGF0ZVNlbGVjdG9yLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pt70wvh/Documents/GitHub/Plot-those-lines/Plot-those-lines/Plot-those-lines/Components/Pages/Error.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
+[C:/Users/pt70wvh/Documents/GitHub/Plot-those-lines/Plot-those-lines/Plot-those-lines/Components/Layout/FormulaireAjoutDonnees.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcRm9ybXVsYWlyZUFqb3V0RG9ubmVlcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pt70wvh/Documents/GitHub/Plot-those-lines/Plot-those-lines/Plot-those-lines/Components/Pages/Home.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
+[C:/Users/pt70wvh/Documents/GitHub/Plot-those-lines/Plot-those-lines/Plot-those-lines/Components/Layout/Graphique.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcR3JhcGhpcXVlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pt70wvh/Documents/GitHub/Plot-those-lines/Plot-those-lines/Plot-those-lines/Components/Routes.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
+[C:/Users/pt70wvh/Documents/GitHub/Plot-those-lines/Plot-those-lines/Plot-those-lines/Components/Layout/Main.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/pt70wvh/Documents/GitHub/Plot-those-lines/Plot-those-lines/Plot-those-lines/Components/_Imports.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/pt70wvh/Documents/GitHub/Plot-those-lines/Plot-those-lines/Plot-those-lines/Components/Layout/MainLayout.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-fxwwdvtn5p
 
 [C:/Users/pt70wvh/Documents/GitHub/Plot-those-lines/Plot-those-lines/Plot-those-lines/Components/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-hqnzumst5o
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pt70wvh/Documents/GitHub/Plot-those-lines/Plot-those-lines/Plot-those-lines/Components/Pages/Graphique.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xHcmFwaGlxdWUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pt70wvh/Documents/GitHub/Plot-those-lines/Plot-those-lines/Plot-those-lines/Components/Pages/HomePage.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pt70wvh/Documents/GitHub/Plot-those-lines/Plot-those-lines/Plot-those-lines/Components/Pages/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
