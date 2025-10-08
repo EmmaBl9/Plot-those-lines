@@ -1,49 +1,81 @@
 ﻿@page "/"
 
-<div style="width: 900px; height: 600px">
-    <ApexChart TItem="MyData"
-               Title="Sample Data">
+<h3>Démographie Suisse - Ton graphique</h3>
 
-        <ApexPointSeries TItem="MyData"
-                         Items="Data"
-                         Name="birth"
-                         SeriesType="SeriesType.Line"
-                         XValue="e => e.Date"
-                         YValue="e=> e.birth" />
+<!-- Ajouter un fichier csv -->
+<div class="Import">
+    <label>Choisir une nouvelle donnée (CSV):</label>
+    <InputFile OnChange="OnInputFileChange" />
+</div>
 
-        <ApexPointSeries TItem="MyData"
-                         Items="Data"
-                         Name="Death"
-                         SeriesType="SeriesType.Line"
-                         XValue="e => e.Date"
-                         YValue="e=> e.Death" />
+<!-- Affichage des fichiers ajoutés -->
+@if (UploadedFiles.Any())
+{
+    <p>Fichiers CSV ajoutés :</p>
+    <ul>
+        @foreach (var fileName in UploadedFiles)
+        {
+            <li>@fileName</li>
+        }
+    </ul>
+}
+
+<!-- Graphique ApexCharts -->
+<div class="chart" style="height:350px; width:100%;">
+    <ApexChart TItem="DataPoint" Title="Graphiqe">
+        <ApexPointSeries TItem="DataPoint" Items="DataPoints" Name="Population" SeriesType="SeriesType.Line" XValue="e => e.Label" YValue="e => e.Value" />
     </ApexChart>
 </div>
 
-
 @code {
-    private List<MyData> Data { get; set; } = new();
-    private List<MyData> TempData { get; set; } = new();
 
-    protected override void OnInitialized()
+    // Liste des points de données initialement vide
+    private List<DataPoint> DataPoints { get; set; } = new();
+
+    // Liste des noms de fichiers CSV chargés
+    private List<string> UploadedFiles = new();
+
+    // méthode pour gérer le chargement du fichier
+    private async Task OnInputFileChange(InputFileChangeEventArgs e)
     {
-        Data.AddRange(new[]
-        {
-            new MyData { Date = "2018", birth = 87851, Death = 67088 },
-            new MyData { Date = "2019", birth = 86172, Death = 67780 },
-            new MyData { Date = "2020", birth = 112, Death = 23 },
-            new MyData { Date = "2021", birth = 136, Death = 31 },
-            new MyData { Date = "2022", birth = 158, Death = 55 },
-            new MyData { Date = "2023", birth = 120, Death = 21 },
-            new MyData { Date = "2024", birth = 138, Death = 28 },
-        });
+        var file = e.File;
+
+        // Ajouter le nom du fichier à la liste des fichiers chargés
+        UploadedFiles.Add(file.Name);
+
+        using var stream = file.OpenReadStream();
+        using var reader = new StreamReader(stream);
+        var content = await reader.ReadToEndAsync();
+
+        var lines = content
+            .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+            .ToList();
+
+        var dataPoints = lines
+            .Where(l => !string.IsNullOrWhiteSpace(l))
+            .Select(l => l.Split(','))
+            .Where(parts => parts.Length == 2)
+            .Select(parts => new DataPoint
+            {
+                Label = parts[0],
+                Value = int.TryParse(parts[1], out var val) ? val : 0
+            }).ToList();
+
+        // mettre à jour le graphique
+        UpdateGraph(dataPoints);
     }
 
-    public class MyData
+    // méthode pour mettre à jour le graphique
+    private void UpdateGraph(List<DataPoint> data)
     {
-        public string Date { get; set; }
-        public int birth { get; set; }
-        public int Death { get; set; }
+        DataPoints = data;
+        StateHasChanged();
     }
 
+    // class pour les données
+    public class DataPoint
+    {
+        public string Label { get; set; }
+        public int Value { get; set; }
+    }
 }
