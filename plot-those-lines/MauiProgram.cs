@@ -1,5 +1,6 @@
 ﻿using ApexCharts;
 using Microsoft.Extensions.Logging;
+using plot_those_lines.Services;
 
 namespace plot_those_lines
 {
@@ -14,9 +15,10 @@ namespace plot_those_lines
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
-
+            
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddApexChartsMaui();
+            builder.Services.AddScoped<DateFilter>();
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
