@@ -4,8 +4,8 @@
 
 <!-- Ajouter un fichier csv -->
 <div class="Import">
-    <label>Choisir une nouvelle donnée (CSV):</label>
-    <InputFile OnChange="OnInputFileChange" />
+    <label>Choisir une nouvelle donnée (CSV) :</label>
+    <InputFile OnChange="OnFileSelected" />
 </div>
 
 <!-- Affichage des fichiers ajoutés -->
@@ -15,68 +15,183 @@
     <ul>
         @foreach (var fileName in UploadedFiles)
         {
-            <li>@fileName</li>
+            <li>
+                @fileName
+                <button class="btn btn-sm btn-danger" @onclick="() => RemoveFile(fileName)">❌</button>
+                
+            </li>
         }
     </ul>
 }
 
 <!-- Graphique ApexCharts -->
-<div class="chart" style="height:350px; width:100%;">
-    <ApexChart TItem="DataPoint" Title="Graphiqe">
-        <ApexPointSeries TItem="DataPoint" Items="DataPoints" Name="Population" SeriesType="SeriesType.Line" XValue="e => e.Label" YValue="e => e.Value" />
+<div class="chart" style="height:400px; width:100%;">
+    <ApexChart TItem="DataPoint" Title="Démographie Suisse" @ref="chart" @key="chartKey">
+        @foreach (var series in Series)
+        {
+            <ApexPointSeries TItem="DataPoint"
+                             Items="series.Points"
+                             Name="@series.Name"
+                             SeriesType="SeriesType.Line"
+                             XValue="p => p.Label"
+                             YValue="p => p.Value ?? 0" />
+        }
     </ApexChart>
 </div>
 
 @code {
+    private List<DataSeries> Series { get; set; } = new();
+    private List<string> UploadedFiles { get; set; } = new();
 
-    // Liste des points de données initialement vide
-    private List<DataPoint> DataPoints { get; set; } = new();
 
-    // Liste des noms de fichiers CSV chargés
-    private List<string> UploadedFiles = new();
-
-    // méthode pour gérer le chargement du fichier
-    private async Task OnInputFileChange(InputFileChangeEventArgs e)
+    // Méthode appelée quand on sélectionne un fichier CSV
+    private async Task OnFileSelected(InputFileChangeEventArgs e)
     {
         var file = e.File;
+        if (!UploadedFiles.Contains(file.Name))
+            UploadedFiles.Add(file.Name);
 
-        // Ajouter le nom du fichier à la liste des fichiers chargés
-        UploadedFiles.Add(file.Name);
+        using var reader = new StreamReader(file.OpenReadStream());
+        var lines = (await reader.ReadToEndAsync())
+                    .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                    .ToList();
 
-        using var stream = file.OpenReadStream();
-        using var reader = new StreamReader(stream);
-        var content = await reader.ReadToEndAsync();
+        if (lines.Count < 2) return;
 
-        var lines = content
-            .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-            .ToList();
+        // récupère l'en-tête avec les noms des catégories
+        var headers = lines[0].Split(',').Skip(1).Select(h => h.Trim()).ToList();
 
-        var dataPoints = lines
-            .Skip(1)
-            .Where(l => !string.IsNullOrWhiteSpace(l))
-            .Select(l => l.Split(','))
-            .Where(parts => parts.Length == 2)
-            .Select(parts => new DataPoint
+        // stocke les années avec leurs valeurs
+        var dataByYear = new Dictionary<string, List<int>>();
+
+        foreach (var line in lines.Skip(1))
+        {
+            var parts = line.Split(',');
+            var year = parts[0].Trim();
+            var values = parts.Skip(1)
+                              .Select(v => int.TryParse(v.Trim(), out var x) ? x : 0)
+                              .ToList();
+
+            dataByYear[year] = values;
+        }
+
+        // crée une série pour chaque catégorie
+        for (int categoryIndex = 0; categoryIndex < headers.Count; categoryIndex++)
+        {
+            var series = new DataSeries
             {
-                Label = parts[0],
-                Value = int.TryParse(parts[1], out var val) ? val : 0
-            }).ToList();
+                Name = headers[categoryIndex],
+                OriginFile = file.Name,
+                Points = new List<DataPoint>()
+            };
 
-        // mettre à jour le graphique
-        UpdateGraph(dataPoints);
+            foreach (var (year, values) in dataByYear)
+            {
+                if (categoryIndex < values.Count)
+                {
+                    series.Points.Add(new DataPoint
+                    {
+                        Label = year,
+                        Value = values[categoryIndex]
+                    });
+                }
+            }
+
+            Series.Add(series);
+        }
+
+        // normalise toutes les séries pour qu'elles aient les mêmes années
+        NormalizeSeriesYears();
+
+        // rafraîchis le graphique
+        StateHasChanged();
+
+        await Task.Delay(50);
+
+        if (chart != null)
+            await chart.RenderAsync();
     }
 
-    // méthode pour mettre à jour le graphique
-    private void UpdateGraph(List<DataPoint> data)
+    // Méthode qui s'assure que toutes les séries ont des points pour toutes les années
+    private void NormalizeSeriesYears()
     {
-        DataPoints = data;
+        // Si aucune série, on ne fait rien
+        if (!Series.Any())
+            return;
+
+        // récupère toutes les années uniques de toutes les séries
+        var allYears = Series
+            .SelectMany(s => s.Points.Select(p => p.Label))
+            .Distinct()
+            .OrderBy(y => y)
+            .ToList();
+
+        // Si aucune année trouvée, on ne fait rien
+        if (!allYears.Any())
+            return;
+
+        // Pour chaque série, ajoute les années manquantes avec 0 comme valeur
+        foreach (var series in Series)
+        {
+            var existingYears = series.Points.Select(p => p.Label).ToHashSet();
+
+            foreach (var year in allYears)
+            {
+                if (!existingYears.Contains(year))
+                {
+                    series.Points.Add(new DataPoint
+                    {
+                        Label = year,
+                        Value = 0
+                    });
+                }
+            }
+
+            // trie les points par année
+            series.Points = series.Points.OrderBy(p => p.Label).ToList();
+        }
+    }
+
+    private ApexChart<DataPoint>? chart;
+    private Guid chartKey = Guid.NewGuid();
+
+    // Méthode pour supprimer un fichier et toutes ses séries
+    private async Task RemoveFile(string fileName)
+    {
+        // supprime le fichier de la liste
+        if (UploadedFiles.Contains(fileName))
+            UploadedFiles.Remove(fileName);
+
+        // Supprime les séries associées au fichier dans la liste existante
+        for (int i = Series.Count - 1; i >= 0; i--)
+        {
+            if (Series[i].OriginFile == fileName)
+                Series.RemoveAt(i);
+        }
+
+        // renormalise les séries restantes après suppression
+        NormalizeSeriesYears();
+
+        // Met à jour le graphique
+        if (chart != null)
+            await chart.RenderAsync();
+
+        chartKey = Guid.NewGuid();
         StateHasChanged();
     }
 
-    // class pour les données
-    public class DataPoint
+    // Classe représentant une série de données
+    private class DataSeries
     {
-        public string Label { get; set; }
-        public int Value { get; set; }
+        public string Name { get; set; } = "";
+        public string OriginFile { get; set; } = "";
+        public List<DataPoint> Points { get; set; } = new();
+    }
+
+    // Classe qui représente un point de données    
+    private class DataPoint
+    {
+        public string Label { get; set; } = ""; // année
+        public int? Value { get; set; }
     }
 }
