@@ -1,11 +1,55 @@
-﻿
+﻿@inject NavigationManager NavManager
+@inject DateFilter DateFilter
+
+<div class="DateFilter">
+    <h5>Filtrer par années :</h5>
+    <div class="filter-inputs">
+        <label>
+            De : 
+            <input 
+                type="number"
+                placeholder="Année début"
+                @bind="startYear"
+                min="1900"
+                max="2100" />
+        </label>
+        <label>
+            À : 
+            <input 
+                type="number"
+                placeholder="Année fin"
+                @bind="endYear"
+                min="1900"
+                max="2100" />
+        </label>
+    </div>
+    <div class="filter-buttons">
+        <button class="btn btn-primary btn-sm" @onclick="ApplyFilter">Appliquer</button>
+        <button class="btn btn-secondary btn-sm" @onclick="ClearFilter">Réinitialiser</button>
+    </div>
+</div>
+
+
 <div class="Theme">
-    <select>
-        <option value="value">Séries temporelles</option>
-        <option value="value">Fonctions mathématiques</option>
+    <select @onchange="(e) => NavManager.NavigateTo(e.Value.ToString())">
+        <option value="/">Séries temporelles</option>
+        <option value="/mathfunctions">Fonctions mathématiques</option>
     </select>
 </div>
 
-@code{
-    private string SelectedTheme { get; set; } = "timeseries";
+@code {
+    private int? startYear;
+    private int? endYear;
+
+    private void ApplyFilter()
+    {
+        DateFilter.SetDateRange(startYear, endYear);
+    }
+
+    private void ClearFilter()
+    {
+        startYear = null;
+        endYear = null;
+        DateFilter.ClearFilter();
+    }
 }
