@@ -13,12 +13,14 @@
 {
     <p>Fichiers CSV ajoutés :</p>
     <ul>
-        @foreach (var fileName in UploadedFiles)
+        @foreach (var file in UploadedFiles)
         {
             <li>
-                @fileName
-                <button class="btn btn-sm btn-danger" @onclick="() => RemoveFile(fileName)">❌</button>
-                
+                @file.Name
+                <input type="color"
+                       value="@file.Color"
+                       @onchange="(e) => ChangeFileColor(file.Name, e.Value?.ToString() ?? file.Color)" />
+                <button class="btn btn-sm btn-danger" @onclick="() => RemoveFile(file.Name)">❌</button>
             </li>
         }
     </ul>
@@ -33,6 +35,7 @@
                              Items="series.Points"
                              Name="@series.Name"
                              SeriesType="SeriesType.Line"
+                             Color="@series.Color"
                              XValue="p => p.Label"
                              YValue="p => p.Value ?? 0" />
         }
@@ -41,15 +44,27 @@
 
 @code {
     private List<DataSeries> Series { get; set; } = new();
-    private List<string> UploadedFiles { get; set; } = new();
+    private List<UploadedFile> UploadedFiles { get; set; } = new();
 
+    private string[] defaultColors = { "#FF5733", "#33FF57", "#3357FF", "#F1C40F", "#9B59B6" };
+    private int colorIndex = 0;
 
     // Méthode appelée quand on sélectionne un fichier CSV
     private async Task OnFileSelected(InputFileChangeEventArgs e)
     {
         var file = e.File;
-        if (!UploadedFiles.Contains(file.Name))
-            UploadedFiles.Add(file.Name);
+
+        // Vérifie si le fichier existe déjà
+        if (UploadedFiles.Any(f => f.Name == file.Name))
+            return;
+
+        // Ajoute le fichier avec une couleur par défaut
+        var uploadedFile = new UploadedFile
+        {
+            Name = file.Name,
+            Color = defaultColors[colorIndex++ % defaultColors.Length]
+        };
+        UploadedFiles.Add(uploadedFile);
 
         using var reader = new StreamReader(file.OpenReadStream());
         var lines = (await reader.ReadToEndAsync())
@@ -81,6 +96,7 @@
             var series = new DataSeries
             {
                 Name = headers[categoryIndex],
+                Color = uploadedFile.Color,
                 OriginFile = file.Name,
                 Points = new List<DataPoint>()
             };
@@ -105,11 +121,31 @@
 
         // rafraîchis le graphique
         StateHasChanged();
-
         await Task.Delay(50);
 
         if (chart != null)
             await chart.RenderAsync();
+    }
+
+    // Méthode pour changer la couleur d'un fichier et de toutes ses séries
+    private async Task ChangeFileColor(string fileName, string newColor)
+    {
+        // Met à jour la couleur du fichier
+        var file = UploadedFiles.FirstOrDefault(f => f.Name == fileName);
+        if (file != null)
+        {
+            file.Color = newColor;
+        }
+
+        // Met à jour la couleur de toutes les séries de ce fichier
+        foreach (var series in Series.Where(s => s.OriginFile == fileName))
+        {
+            series.Color = newColor;
+        }
+
+        // Recrée le graphique pour appliquer les nouvelles couleurs
+        chartKey = Guid.NewGuid();
+        StateHasChanged();
     }
 
     // Méthode qui s'assure que toutes les séries ont des points pour toutes les années
@@ -159,36 +195,36 @@
     private async Task RemoveFile(string fileName)
     {
         // supprime le fichier de la liste
-        if (UploadedFiles.Contains(fileName))
-            UploadedFiles.Remove(fileName);
+        UploadedFiles.RemoveAll(f => f.Name == fileName);
 
-        // Supprime les séries associées au fichier dans la liste existante
-        for (int i = Series.Count - 1; i >= 0; i--)
-        {
-            if (Series[i].OriginFile == fileName)
-                Series.RemoveAt(i);
-        }
+        // Supprime les séries associées au fichier
+        Series.RemoveAll(s => s.OriginFile == fileName);
 
         // renormalise les séries restantes après suppression
         NormalizeSeriesYears();
 
         // Met à jour le graphique
-        if (chart != null)
-            await chart.RenderAsync();
-
         chartKey = Guid.NewGuid();
         StateHasChanged();
+    }
+
+    // Classe représentant un fichier uploadé
+    private class UploadedFile
+    {
+        public string Name { get; set; } = "";
+        public string Color { get; set; } = "#000000";
     }
 
     // Classe représentant une série de données
     private class DataSeries
     {
         public string Name { get; set; } = "";
+        public string Color { get; set; } = "#000000";
         public string OriginFile { get; set; } = "";
         public List<DataPoint> Points { get; set; } = new();
     }
 
-    // Classe qui représente un point de données    
+    // Classe qui représente un point de données
     private class DataPoint
     {
         public string Label { get; set; } = ""; // année
