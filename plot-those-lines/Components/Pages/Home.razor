@@ -1,4 +1,6 @@
 ﻿@page "/"
+@inject DateFilter DateFilter
+@implements IDisposable
 
 <h3>Démographie Suisse - Ton graphique</h3>
 
@@ -29,7 +31,7 @@
 <!-- Graphique ApexCharts -->
 <div class="chart" style="height:400px; width:100%;">
     <ApexChart TItem="DataPoint" Title="Démographie Suisse" @ref="chart" @key="chartKey">
-        @foreach (var series in Series)
+        @foreach (var series in FilteredSeries)
         {
             <ApexPointSeries TItem="DataPoint"
                              Items="series.Points"
@@ -48,6 +50,38 @@
 
     private string[] defaultColors = { "#FF5733", "#33FF57", "#3357FF", "#F1C40F", "#9B59B6" };
     private int colorIndex = 0;
+
+    private List<DataSeries> FilteredSeries
+    {
+        get
+        {
+            return Series.Select(s => new DataSeries
+            {
+                Name = s.Name,
+                Color = s.Color,
+                OriginFile = s.OriginFile,
+                Points = s.Points
+                    .Where(p => DateFilter.IsYearInRange(p.Label))
+                    .ToList()
+            }).ToList();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        DateFilter.OnFilterChanged += OnFilterChanged;
+    }
+
+    private async void OnFilterChanged()
+    {
+        chartKey = Guid.NewGuid();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        DateFilter.OnFilterChanged -= OnFilterChanged;
+    }
 
     // Méthode appelée quand on sélectionne un fichier CSV
     private async Task OnFileSelected(InputFileChangeEventArgs e)
@@ -230,4 +264,5 @@
         public string Label { get; set; } = ""; // année
         public int? Value { get; set; }
     }
+
 }
