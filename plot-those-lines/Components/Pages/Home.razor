@@ -10,22 +10,33 @@
     <InputFile OnChange="OnFileSelected" />
 </div>
 
-<!-- Affichage des fichiers ajoutés -->
+<!-- Affichage des fichiers ajoutés avec leurs séries -->
 @if (UploadedFiles.Any())
 {
     <p>Fichiers CSV ajoutés :</p>
-    <ul>
-        @foreach (var file in UploadedFiles)
-        {
-            <li>
-                @file.Name
-                <input type="color"
-                       value="@file.Color"
-                       @onchange="(e) => ChangeFileColor(file.Name, e.Value?.ToString() ?? file.Color)" />
-                <button class="btn btn-sm btn-danger" @onclick="() => RemoveFile(file.Name)">❌</button>
-            </li>
-        }
-    </ul>
+    @foreach (var file in UploadedFiles)
+    {
+        <div style="margin-bottom: 15px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                <strong>📄 @file.Name</strong>
+                <button class="btn btn-sm btn-danger" @onclick="() => RemoveFile(file.Name)">❌ Supprimer le fichier</button>
+            </div>
+
+            <!-- Liste des séries de ce fichier -->
+            <ul style="list-style: none; padding-left: 20px;">
+                @foreach (var series in Series.Where(s => s.OriginFile == file.Name))
+                {
+                    <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                        <input type="color"
+                               value="@series.Color"
+                               @onchange="(e) => ChangeSeriesColor(series.Name, series.OriginFile, e.Value?.ToString() ?? series.Color)"
+                               title="Changer la couleur de cette série" />
+                        <span>@series.Name</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
 }
 
 <!-- Graphique ApexCharts -->
@@ -48,7 +59,8 @@
     private List<DataSeries> Series { get; set; } = new();
     private List<UploadedFile> UploadedFiles { get; set; } = new();
 
-    private string[] defaultColors = { "#FF5733", "#33FF57", "#3357FF", "#F1C40F", "#9B59B6" };
+    //Palette de couleur par défault
+    private string[] defaultColors = { "#f72585", "#b5179e", "#7209b7", "#560bad", "#480ca8", "#3a0ca3", "#3498DB", "#3f37c9", "#4361ee", "#4895ef", "#4cc9f0" };
     private int colorIndex = 0;
 
     private List<DataSeries> FilteredSeries
@@ -92,11 +104,10 @@
         if (UploadedFiles.Any(f => f.Name == file.Name))
             return;
 
-        // Ajoute le fichier avec une couleur par défaut
+        // Ajoute le fichier
         var uploadedFile = new UploadedFile
         {
-            Name = file.Name,
-            Color = defaultColors[colorIndex++ % defaultColors.Length]
+            Name = file.Name
         };
         UploadedFiles.Add(uploadedFile);
 
@@ -124,13 +135,13 @@
             dataByYear[year] = values;
         }
 
-        // crée une série pour chaque catégorie
+        // crée une série pour chaque catégorie avec une couleur unique
         for (int categoryIndex = 0; categoryIndex < headers.Count; categoryIndex++)
         {
             var series = new DataSeries
             {
                 Name = headers[categoryIndex],
-                Color = uploadedFile.Color,
+                Color = defaultColors[colorIndex++ % defaultColors.Length], // Couleur unique par série
                 OriginFile = file.Name,
                 Points = new List<DataPoint>()
             };
@@ -161,18 +172,12 @@
             await chart.RenderAsync();
     }
 
-    // Méthode pour changer la couleur d'un fichier et de toutes ses séries
-    private async Task ChangeFileColor(string fileName, string newColor)
+    // Méthode pour changer la couleur d'une série spécifique
+    private async Task ChangeSeriesColor(string seriesName, string fileName, string newColor)
     {
         // Met à jour la couleur du fichier
-        var file = UploadedFiles.FirstOrDefault(f => f.Name == fileName);
-        if (file != null)
-        {
-            file.Color = newColor;
-        }
-
-        // Met à jour la couleur de toutes les séries de ce fichier
-        foreach (var series in Series.Where(s => s.OriginFile == fileName))
+        var series = Series.FirstOrDefault(s => s.Name == seriesName && s.OriginFile == fileName);
+        if (series != null)
         {
             series.Color = newColor;
         }
@@ -246,7 +251,6 @@
     private class UploadedFile
     {
         public string Name { get; set; } = "";
-        public string Color { get; set; } = "#000000";
     }
 
     // Classe représentant une série de données
