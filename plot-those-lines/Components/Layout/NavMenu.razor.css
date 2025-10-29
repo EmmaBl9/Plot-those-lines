@@ -86,6 +86,16 @@
     display: block;
 }
 
+.DateFilter {
+    margin-top:40px;
+}
+
+.filter-inputs label {
+    margin-bottom: 10px;
+}
+.filter-buttons {
+    margin-bottom: 50px;
+}
 @media (min-width: 641px) {
     .navbar-toggler {
         display: none;

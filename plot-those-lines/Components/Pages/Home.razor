@@ -2,8 +2,6 @@
 @inject DateFilter DateFilter
 @implements IDisposable
 
-<h3>Démographie Suisse - Ton graphique</h3>
-
 <!-- Ajouter un fichier csv -->
 <div class="Import">
     <label>Choisir une nouvelle donnée (CSV) :</label>
@@ -18,12 +16,12 @@
     {
         <div style="margin-bottom: 15px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                <strong>📄 @file.Name</strong>
+                <strong>@file.Name</strong>
                 <button class="btn btn-sm btn-danger" @onclick="() => RemoveFile(file.Name)">❌ Supprimer le fichier</button>
             </div>
 
             <!-- Liste des séries de ce fichier -->
-            <ul style="list-style: none; padding-left: 20px;">
+            <div style="list-style: none; padding-left: 10px;">
                 @foreach (var series in Series.Where(s => s.OriginFile == file.Name))
                 {
                     <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
@@ -34,14 +32,14 @@
                         <span>@series.Name</span>
                     </li>
                 }
-            </ul>
+            </div>
         </div>
     }
 }
 
 <!-- Graphique ApexCharts -->
 <div class="chart" style="height:400px; width:100%;">
-    <ApexChart TItem="DataPoint" Title="Démographie Suisse" @ref="chart" @key="chartKey">
+    <ApexChart TItem="DataPoint" Title="Démographie Suisse" @ref="chart" @key="chartKey" Options="chartOptions">
         @foreach (var series in FilteredSeries)
         {
             <ApexPointSeries TItem="DataPoint"
@@ -56,6 +54,16 @@
 </div>
 
 @code {
+    //Pour aligner le titre du graphique au centre
+    private ApexChartOptions<DataPoint> chartOptions = new()
+    {
+        Title = new Title
+        {
+            Text = "Démographie Suisse",
+            Align = Align.Center
+        }
+    };
+
     private List<DataSeries> Series { get; set; } = new();
     private List<UploadedFile> UploadedFiles { get; set; } = new();
 
