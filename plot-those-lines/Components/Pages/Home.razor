@@ -47,7 +47,7 @@
             <ApexPointSeries TItem="DataPoint"
                              Items="series.Points"
                              Name="@series.Name"
-                             SeriesType="SeriesType.Line"
+                             SeriesType="SeriesType.Area"
                              Color="@series.Color"
                              XValue="p => p.Label"
                              YValue="p => p.Value ?? 0" />
@@ -122,14 +122,14 @@
         var headers = lines[0].Split(',').Skip(1).Select(h => h.Trim()).ToList();
 
         // stocke les années avec leurs valeurs
-        var dataByYear = new Dictionary<string, List<int>>();
+        var dataByYear = new Dictionary<string, List<decimal>>();
 
         foreach (var line in lines.Skip(1))
         {
             var parts = line.Split(',');
             var year = parts[0].Trim();
             var values = parts.Skip(1)
-                              .Select(v => int.TryParse(v.Trim(), out var x) ? x : 0)
+                              .Select(v => decimal.TryParse(v.Trim(), out var x) ? x : 0)
                               .ToList();
 
             dataByYear[year] = values;
@@ -266,7 +266,7 @@
     private class DataPoint
     {
         public string Label { get; set; } = ""; // année
-        public int? Value { get; set; }
+        public decimal? Value { get; set; }
     }
 
 }
