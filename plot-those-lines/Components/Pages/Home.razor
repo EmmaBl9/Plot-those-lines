@@ -184,6 +184,12 @@
     // Méthode pour changer la couleur d'une série spécifique
     private async Task ChangeSeriesColor(string seriesName, string fileName, string newColor)
     {
+        //utilisation de l'extension 2
+        if (Series.IsEmpty())
+        {
+            throw new Exception("Series is empty");    
+        }
+
         // Met à jour la couleur du fichier
         var series = Series.FirstOrDefault(s => s.Name == seriesName && s.OriginFile == fileName);
         if (series != null)
