@@ -26,10 +26,11 @@
                 {
                     <li style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
                         <input type="color"
-                               value="@series.Color"
-                               @onchange="(e) => ChangeSeriesColor(series.Name, series.OriginFile, e.Value?.ToString() ?? series.Color)"
-                               title="Changer la couleur de cette série" />
+                        value="@series.Color"
+                        @onchange="(e) => ChangeSeriesColor(series.Name, series.OriginFile, e.Value?.ToString() ?? series.Color)"
+                        title="Changer la couleur de cette série" />
                         <span>@series.Name</span>
+                        <span>@InfosData(series)</span>
                     </li>
                 }
             </div>
@@ -43,12 +44,12 @@
         @foreach (var series in FilteredSeries)
         {
             <ApexPointSeries TItem="DataPoint"
-                             Items="series.Points"
-                             Name="@series.Name"
-                             SeriesType="SeriesType.Area"
-                             Color="@series.Color"
-                             XValue="p => p.Label"
-                             YValue="p => p.Value ?? 0" />
+            Items="series.Points"
+            Name="@series.Name"
+            SeriesType="SeriesType.Area"
+            Color="@series.Color"
+            XValue="p => p.Label"
+            YValue="p => p.Value ?? 0" />
         }
     </ApexChart>
 </div>
@@ -255,6 +256,15 @@
         StateHasChanged();
     }
 
+    // Méthode pour utiliser les infos des données
+    public string InfosData(DataSeries serie)
+    {
+        decimal? max = serie.Points.Max(m => m.Value);
+        decimal? min = serie.Points.Min(m => m.Value);
+        decimal? avg = serie.Points.Average(a => a.Value).RoundTo2();
+        return $"(Min : {min}, Max : {max}, Moyenne : {avg})";
+    }
+
     // Classe représentant un fichier uploadé
     private class UploadedFile
     {
@@ -262,7 +272,7 @@
     }
 
     // Classe représentant une série de données
-    private class DataSeries
+    public class DataSeries
     {
         public string Name { get; set; } = "";
         public string Color { get; set; } = "#000000";
@@ -271,7 +281,7 @@
     }
 
     // Classe qui représente un point de données
-    private class DataPoint
+    public class DataPoint
     {
         public string Label { get; set; } = ""; // année
         public decimal? Value { get; set; }
