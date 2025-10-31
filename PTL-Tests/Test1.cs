@@ -20,5 +20,19 @@ namespace PTL_Tests
             Assert.AreEqual(2020, service.EndYear);
         }
 
+        [TestMethod]
+        public void ClearFilter_DevraitReinitialiserLesAnnees()
+        {
+            // Arrange
+            var service = new DateFilter();
+            service.SetDateRange(2015, 2020);
+
+            // Act
+            service.ClearFilter();
+
+            // Assert
+            Assert.IsNull(service.StartYear);
+            Assert.IsNull(service.EndYear);
+        }
     }
 }
