@@ -30,6 +30,13 @@ Les données utilisées proviennent du site officiel de l'Office fédéral de la
 
 Ces données ont été téléchargées sous forme de fichiers CSV, puis importées dans l'application afin d'être affichées sous forme de courbes temporelles.
 
+Les fichiers CSV doivent suivre ce modele :
+```CSV
+Années,Naissances vivantes,Décès
+1900,94316,63606
+1901,97028,60018
+...
+```
 ---
 
 ## Planification
