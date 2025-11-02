@@ -1,4 +1,9 @@
-﻿@page "/"
+﻿<!--ETML
+Auteur : [Ton Nom]
+Date   : [Date du jour]
+Description : Classe principale gérant l’importation, le filtrage et l’affichage graphique des fichiers CSV.-->
+
+@page "/"
 @inject DateFilter DateFilter
 @implements IDisposable
 
@@ -55,7 +60,10 @@
 </div>
 
 @code {
-    //Pour aligner le titre du graphique au centre
+
+    /// <summary>
+    /// Options d'affichage du graphique.
+    /// </summary>
     private ApexChartOptions<DataPoint> chartOptions = new()
     {
         Title = new Title
@@ -65,13 +73,29 @@
         }
     };
 
+    /// <summary>
+    /// Liste des séries de données.
+    /// </summary>
     private List<DataSeries> Series { get; set; } = new();
+
+    /// <summary>
+    /// Liste des fichiers importés.
+    /// </summary>
     private List<UploadedFile> UploadedFiles { get; set; } = new();
 
-    //Palette de couleur par défault
-    private string[] defaultColors = { "#f72585", "#b5179e", "#7209b7", "#560bad", "#480ca8", "#3a0ca3", "#3498DB", "#3f37c9", "#4361ee", "#4895ef", "#4cc9f0" };
+    /// <summary>
+    /// Palette de couleurs par défaut.
+    /// </summary>
+    private string[] defaultColors = 
+    { 
+        "#f72585", "#b5179e", "#7209b7", "#560bad", "#480ca8", 
+        "#3a0ca3", "#3498DB", "#3f37c9", "#4361ee", "#4895ef", "#4cc9f0" 
+    };
     private int colorIndex = 0;
 
+    /// <summary>
+    /// Séries filtrées selon la plage de dates.
+    /// </summary>
     private List<DataSeries> FilteredSeries
     {
         get
@@ -88,32 +112,41 @@
         }
     }
 
+    /// <summary>
+    /// Initialise les abonnements aux événements.
+    /// </summary>
     protected override void OnInitialized()
     {
         DateFilter.OnFilterChanged += OnFilterChanged;
     }
 
+    /// <summary>
+    /// Méthode appelée lors du changement de filtre.
+    /// </summary>
     private async void OnFilterChanged()
     {
         chartKey = Guid.NewGuid();
         await InvokeAsync(StateHasChanged);
     }
 
+    /// <summary>
+    /// Désabonnement lors de la suppression.
+    /// </summary>
     public void Dispose()
     {
         DateFilter.OnFilterChanged -= OnFilterChanged;
     }
 
-    // Méthode appelée quand on sélectionne un fichier CSV
+    /// <summary>
+    /// Appelée lors de la sélection d’un fichier CSV.
+    /// </summary>
     private async Task OnFileSelected(InputFileChangeEventArgs e)
     {
         var file = e.File;
 
-        // Vérifie si le fichier existe déjà
         if (UploadedFiles.Any(f => f.Name == file.Name))
             return;
 
-        // Ajoute le fichier
         var uploadedFile = new UploadedFile
         {
             Name = file.Name
@@ -127,10 +160,7 @@
 
         if (lines.Count < 2) return;
 
-        // récupère l'en-tête avec les noms des catégories
         var headers = lines[0].Split(',').Skip(1).Select(h => h.Trim()).ToList();
-
-        // stocke les années avec leurs valeurs
         var dataByYear = new Dictionary<string, List<decimal>>();
 
         foreach (var line in lines.Skip(1))
@@ -144,13 +174,12 @@
             dataByYear[year] = values;
         }
 
-        // crée une série pour chaque catégorie avec une couleur unique
         for (int categoryIndex = 0; categoryIndex < headers.Count; categoryIndex++)
         {
             var series = new DataSeries
             {
                 Name = headers[categoryIndex],
-                Color = defaultColors[colorIndex++ % defaultColors.Length], // Couleur unique par série
+                Color = defaultColors[colorIndex++ % defaultColors.Length],
                 OriginFile = file.Name,
                 Points = new List<DataPoint>()
             };
@@ -170,10 +199,7 @@
             Series.Add(series);
         }
 
-        // normalise toutes les séries pour qu'elles aient les mêmes années
         NormalizeSeriesYears();
-
-        // rafraîchis le graphique
         StateHasChanged();
         await Task.Delay(50);
 
@@ -181,46 +207,43 @@
             await chart.RenderAsync();
     }
 
-    // Méthode pour changer la couleur d'une série spécifique
+    /// <summary>
+    /// Change la couleur d’une série.
+    /// </summary>
     private async Task ChangeSeriesColor(string seriesName, string fileName, string newColor)
     {
-        //utilisation de l'extension 2
         if (Series.IsEmpty())
         {
-            throw new Exception("Series is empty");    
+            throw new Exception("Series is empty");
         }
 
-        // Met à jour la couleur du fichier
         var series = Series.FirstOrDefault(s => s.Name == seriesName && s.OriginFile == fileName);
         if (series != null)
         {
             series.Color = newColor;
         }
 
-        // Recrée le graphique pour appliquer les nouvelles couleurs
         chartKey = Guid.NewGuid();
         StateHasChanged();
     }
 
-    // Méthode qui s'assure que toutes les séries ont des points pour toutes les années
+    /// <summary>
+    /// Normalise les années des séries.
+    /// </summary>
     private void NormalizeSeriesYears()
     {
-        // Si aucune série, on ne fait rien
         if (!Series.Any())
             return;
 
-        // récupère toutes les années uniques de toutes les séries
         var allYears = Series
             .SelectMany(s => s.Points.Select(p => p.Label))
             .Distinct()
             .OrderBy(y => y)
             .ToList();
 
-        // Si aucune année trouvée, on ne fait rien
         if (!allYears.Any())
             return;
 
-        // Pour chaque série, ajoute les années manquantes avec 0 comme valeur
         foreach (var series in Series)
         {
             var existingYears = series.Points.Select(p => p.Label).ToHashSet();
@@ -237,7 +260,6 @@
                 }
             }
 
-            // trie les points par année
             series.Points = series.Points.OrderBy(p => p.Label).ToList();
         }
     }
@@ -245,24 +267,21 @@
     private ApexChart<DataPoint>? chart;
     private Guid chartKey = Guid.NewGuid();
 
-    // Méthode pour supprimer un fichier et toutes ses séries
+    /// <summary>
+    /// Supprime un fichier et ses séries.
+    /// </summary>
     private async Task RemoveFile(string fileName)
     {
-        // supprime le fichier de la liste
         UploadedFiles.RemoveAll(f => f.Name == fileName);
-
-        // Supprime les séries associées au fichier
         Series.RemoveAll(s => s.OriginFile == fileName);
-
-        // renormalise les séries restantes après suppression
         NormalizeSeriesYears();
-
-        // Met à jour le graphique
         chartKey = Guid.NewGuid();
         StateHasChanged();
     }
 
-    // Méthode pour utiliser les infos des données
+    /// <summary>
+    /// Retourne les statistiques d’une série.
+    /// </summary>
     public string InfosData(DataSeries serie)
     {
         decimal? max = serie.Points.Max(m => m.Value);
@@ -271,13 +290,17 @@
         return $"(Min : {min}, Max : {max}, Moyenne : {avg})";
     }
 
-    // Classe représentant un fichier uploadé
+    /// <summary>
+    /// Représente un fichier importé.
+    /// </summary>
     private class UploadedFile
     {
         public string Name { get; set; } = "";
     }
 
-    // Classe représentant une série de données
+    /// <summary>
+    /// Représente une série de données.
+    /// </summary>
     public class DataSeries
     {
         public string Name { get; set; } = "";
@@ -286,11 +309,12 @@
         public List<DataPoint> Points { get; set; } = new();
     }
 
-    // Classe qui représente un point de données
+    /// <summary>
+    /// Représente un point de données.
+    /// </summary>
     public class DataPoint
     {
-        public string Label { get; set; } = ""; // année
+        public string Label { get; set; } = "";
         public decimal? Value { get; set; }
     }
-
 }

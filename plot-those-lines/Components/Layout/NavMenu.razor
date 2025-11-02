@@ -1,4 +1,9 @@
-﻿@inject NavigationManager NavManager
+﻿<!--ETML
+Auteur : [Ton Nom]
+Date   : [Date du jour]
+Description : Classe principale gérant l’importation, le filtrage et l’affichage graphique des fichiers CSV.-->
+
+@inject NavigationManager NavManager
 @inject DateFilter DateFilter
 
 <div class="DateFilter">
@@ -30,14 +35,27 @@
 </div>
 
 @code {
+    /// <summary>
+    /// Année de début du filtre.
+    /// </summary>
     private int? startYear;
+
+    /// <summary>
+    /// Année de fin du filtre.
+    /// </summary>
     private int? endYear;
 
+    /// <summary>
+    /// Applique le filtre d’années défini par l’utilisateur.
+    /// </summary>
     private void ApplyFilter()
     {
         DateFilter.SetDateRange(startYear, endYear);
     }
 
+    /// <summary>
+    /// Réinitialise le filtre des années.
+    /// </summary>
     private void ClearFilter()
     {
         startYear = null;
